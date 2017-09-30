@@ -12,12 +12,13 @@ export class LatLngService {
       Math.cos(this.deg2rad(pos1.latitude)) * Math.cos(this.deg2rad(pos2.latitude)) *
       Math.sin(dLng / 2) * Math.sin(dLng / 2);
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    let dist = (earthRadius * c); 
+    let dist = (earthRadius * c);
 
     return dist;
   }
 
   deg2rad(deg): number {
+      
     return deg * (Math.PI / 180)
   }
 

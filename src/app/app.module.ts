@@ -14,6 +14,7 @@ import {LatLngService} from '../services/latlngservice';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {Geolocation} from '@ionic-native/geolocation';
+import { OpeninghoursService } from "../services/openinghoursservice";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {Geolocation} from '@ionic-native/geolocation';
   ],
   providers: [
     ChristmasMarketService,
+    OpeninghoursService,
     LatLngService,
     StatusBar,
     SplashScreen,
