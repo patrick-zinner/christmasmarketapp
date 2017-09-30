@@ -27,14 +27,33 @@ describe('OpeninghoursService', () => {
     };
   });
 
-  it('should find the extraordinaryhour', () => {
+  it('should find the extraordinary openinghours', () => {
     let serviceResult = service.getOpeningHoursForTime(market, new Date(2017, 11, 6));
     expect(serviceResult.open).toBeFalsy();
   });
 
-  it('should find the normaopeninghours', () => {
-      let serviceResult = service.getOpeningHoursForTime(market, new Date(2017,11,13));
-      expect(serviceResult.open).toBeTruthy();
+  it('should find the normal openinghours', () => {
+    let serviceResult = service.getOpeningHoursForTime(market, new Date(2017, 11, 13));
+    expect(serviceResult.open).toBeTruthy();
   });
 
-})
+  it('should return false because 2017-12-06 has extraordinary opening hours', () => {
+    let serviceResult = service.isOpenAt(market, new Date(2017, 11, 6, 12,0,0));
+    expect(serviceResult).toBeFalsy();
+  });
+
+  it('should return true because 12pm is within the opening hours', () => {
+    let serviceResult = service.isOpenAt(market, new Date(2017, 11, 13,12,0,0));
+    expect(serviceResult).toBeTruthy();
+  });
+
+  it('should return true because 9am is not within the opening hours', () => {
+    let serviceResult = service.isOpenAt(market, new Date(2017, 11, 13,9,0,0));
+    expect(serviceResult).toBeFalsy();
+  });
+
+  it('should return true because 11pm is not within the opening hours', () => {
+    let serviceResult = service.isOpenAt(market, new Date(2017, 11, 13,23,0,0));
+    expect(serviceResult).toBeFalsy();
+  });
+});

@@ -24,7 +24,7 @@ export class OpeninghoursService {
 
   public isOpenAt(market: Christmasmarket, time: Date): boolean {
     let nowMinutes = time.getHours() * 60 + time.getMinutes();
-    let openingHours = this.getOpeningHoursForNow(market);
+    let openingHours = this.getOpeningHoursForTime(market, time);
     if (openingHours.open) {
       if (openingHours.start <= nowMinutes && openingHours.end >= nowMinutes) {
         return true;
@@ -35,7 +35,6 @@ export class OpeninghoursService {
 
   private findNormalOpeningHours(market: Christmasmarket, day: Date): NormalOpeningHours {
     let dayOfWeek = day.getDay();
-    console.log('dayOfWeek: ' + dayOfWeek);
     return market.openingHours.filter(oh => oh.dayOfWeek == dayOfWeek)[0];
   }
 
