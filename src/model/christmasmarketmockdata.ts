@@ -1,8 +1,25 @@
 import {Christmasmarket} from './christmasmarket';
 
-export const MARKETS: Christmasmarket[] = [
- /* {id: 11, name: 'Markt 1', open: true, position: {latitude: 48.220208, longitude: 16.369811}},
-  {id: 12, name: 'Markt 2', open: true, position: {latitude: 48.220080, longitude: 16.369813}},
-  {id: 13, name: 'Markt 3', open: true, position: {latitude: 48.216995, longitude: 16.369815}},
-  {id: 14, name: 'Markt 4', open: true, position: {latitude: 48.216763, longitude: 16.369816}}*/
+export const MARKETS: Christmasmarket[] = [{
+  id: 1,
+  name: 'Altwiener Christkindlmarkt',
+  position: { latitude: 0.0, longitude: 0.0 },
+  start: new Date(2017, 10, 25),
+  end: new Date(2017, 11, 20),
+  openingHours: [
+    { dayOfWeek: 0, open: true, start: 600, end: 1200 },
+    { dayOfWeek: 1, open: true, start: 600, end: 1200 },
+    { dayOfWeek: 2, open: true, start: 600, end: 1200 },
+    { dayOfWeek: 3, open: true, start: 600, end: 1200 },
+    { dayOfWeek: 4, open: true, start: 600, end: 1200 },
+    { dayOfWeek: 5, open: true, start: 600, end: 1200 },
+    { dayOfWeek: 6, open: true, start: 600, end: 1200 }
+  ],
+  extraordinaryOpeningHours: [{
+    date: new Date(2017, 11, 6),
+    open: false,
+    start: null,
+    end: null,
+  }]
+}
 ];

@@ -15,15 +15,20 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {Geolocation} from '@ionic-native/geolocation';
 import { OpeninghoursService } from "../services/openinghoursservice";
+import { OpeningHourStatePipe } from "../pipes/openinghourstatepipe";
+import { DatePipe } from "@angular/common";
+import { MarketDetailPage } from "../pages/marketdetail/marketdetail";
 
 @NgModule({
   declarations: [
     MyApp,
     MapPage,
     ListPage,
+    MarketDetailPage,
     MarketoverviewPage,
     DistancePipe,
-    DistanceUnitPipe
+    DistanceUnitPipe,
+    OpeningHourStatePipe
   ],
   imports: [
     BrowserModule,
@@ -34,10 +39,12 @@ import { OpeninghoursService } from "../services/openinghoursservice";
     MyApp,
     MapPage,
     ListPage,
-    MarketoverviewPage
+    MarketoverviewPage,
+    MarketDetailPage
   ],
   providers: [
     ChristmasMarketService,
+    DatePipe,
     OpeninghoursService,
     LatLngService,
     StatusBar,
