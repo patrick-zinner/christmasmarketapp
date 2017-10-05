@@ -12,50 +12,98 @@
       <ion-card-title>
         {{market.name}}
       </ion-card-title>
-      <div style="background-color: green; width: 100vw; height: 40vw;">
-        Map
-      </div>
+
       <ion-item>
         <ion-icon name="calendar" item-start>
         </ion-icon>
-        <h2>from {{market.start | date:'shortDate'}} to {{market.end | date:'shortDate'}}</h2>
+        {{market.start | date:'shortDate'}} - {{market.end | date:'shortDate'}}
       </ion-item>
+
       <ion-item>
         <ion-icon name="pin" item-start item-top>
         </ion-icon>
-        <h2>3 km away</h2>
+        {{market.address}}
       </ion-item>
-      <ion-item>
-        <ion-icon name="clock" item-top item-start>
-        </ion-icon>
-        <h2>Opening Hours</h2>
 
-      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item style="padding-left: 5px !important;">
+              <ion-icon name="heart-outline" item-start>
+              </ion-icon>
+              <ion-icon name="star">
+              </ion-icon>
+              <ion-icon name="star">
+              </ion-icon>
+              <ion-icon name="star">
+              </ion-icon>
+              <ion-icon name="star">
+              </ion-icon>
+              <ion-icon name="star-half">
+              </ion-icon>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-icon name="cash" item-start>
+              </ion-icon>
+              <ion-icon name="logo-euro">
+              </ion-icon>
+              <ion-icon name="logo-euro">
+              </ion-icon>
+              <ion-icon name="logo-euro">
+              </ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
 
       <ion-item>
         <ion-grid>
           <ion-row>
-            <ion-col col-2><b>Mon:</b></ion-col>
-            <ion-col col-4>12pm - 18pm</ion-col>
-            <ion-col col-2><b>Tue:</b></ion-col>
-            <ion-col col-4>12pm - 19pm</ion-col>
+            <ion-col col-12>
+              <h2>Opening Hours</h2>
+            </ion-col>
           </ion-row>
           <ion-row>
-              <ion-col col-2><b>Wed:</b></ion-col>
-              <ion-col col-4>12pm - 18pm</ion-col>
-              <ion-col col-2><b>Thu:</b></ion-col>
-              <ion-col col-4>12pm - 19pm</ion-col>
+            <ion-col col-4 class="day-label"><b>Mon:</b></ion-col>
+            <ion-col col-8>{{market | openinghours:1}}</ion-col>
           </ion-row>
           <ion-row>
-              <ion-col col-2><b>Fri:</b></ion-col>
-              <ion-col col-4>12pm - 18pm</ion-col>
-              <ion-col col-2><b>Sat:</b></ion-col>
-              <ion-col col-4>12pm - 19pm</ion-col>
+            <ion-col col-4 class="day-label"><b>Tue:</b></ion-col>
+            <ion-col col-8>{{market | openinghours:2}}</ion-col>
           </ion-row>
           <ion-row>
-              <ion-col col-2><b>Sun:</b></ion-col>
-              <ion-col col-4>12pm - 18pm</ion-col>
-            
+            <ion-col col-4 class="day-label"><b>Wed:</b></ion-col>
+            <ion-col col-8>{{market | openinghours:3}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-4 class="day-label"><b>Thu:</b></ion-col>
+            <ion-col col-8>{{market | openinghours:4}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-4 class="day-label"><b>Fri:</b></ion-col>
+            <ion-col col-8>{{market | openinghours:5}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-4 class="day-label"><b>Sat:</b></ion-col>
+            <ion-col col-8>{{market | openinghours:6}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-4 class="day-label"><b>Sun:</b></ion-col>
+            <ion-col col-8>{{market | openinghours:0}}</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let extraordinaryOpeningHour of market.extraordinaryOpeningHours">
+            <ion-col col-4 class="day-label"><b>{{extraordinaryOpeningHour.date | date:shortDate}}:</b></ion-col>
+            <ion-col col-8>
+              <ng-container *ngIf="extraordinaryOpeningHour.open">
+                {{extraordinaryOpeningHour.start | minutes}} - {{extraordinaryOpeningHour.end | minutes}}
+              </ng-container>
+              <ng-container *ngIf="!extraordinaryOpeningHour.open">
+                Closed
+              </ng-container>
+            </ion-col>
           </ion-row>
         </ion-grid>
       </ion-item>

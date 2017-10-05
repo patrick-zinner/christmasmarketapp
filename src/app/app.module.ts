@@ -18,6 +18,8 @@ import { OpeninghoursService } from "../services/openinghoursservice";
 import { OpeningHourStatePipe } from "../pipes/openinghourstatepipe";
 import { DatePipe } from "@angular/common";
 import { MarketDetailPage } from "../pages/marketdetail/marketdetail";
+import { MinutePipe } from "../pipes/minutes.pipe";
+import { OpeningHoursPipe } from "../pipes/openinghours.pipe";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { MarketDetailPage } from "../pages/marketdetail/marketdetail";
     MarketoverviewPage,
     DistancePipe,
     DistanceUnitPipe,
-    OpeningHourStatePipe
+    OpeningHourStatePipe,
+    MinutePipe,
+    OpeningHoursPipe
   ],
   imports: [
     BrowserModule,
@@ -50,6 +54,8 @@ import { MarketDetailPage } from "../pages/marketdetail/marketdetail";
     StatusBar,
     SplashScreen,
     Geolocation,
+    MinutePipe,
+    OpeningHoursPipe,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
