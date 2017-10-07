@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavParams } from "ionic-angular";
+import { NavParams, ModalController } from "ionic-angular";
 import { Christmasmarket } from "../../model/christmasmarket";
 import {Geolocation} from '@ionic-native/geolocation';
 import { LatLng } from "../../model/latlng";
@@ -14,6 +14,7 @@ import {
   Marker
 } from '@ionic-native/google-maps';
 import { LaunchNavigator, LaunchNavigatorOptions } from "@ionic-native/launch-navigator";
+import { RatingDialogComponent } from "./ratingdialog/ratingdialog.component";
 
 
 @Component({
@@ -26,8 +27,6 @@ export class MarketDetailPage implements OnInit {
   dayOfWeek: number;
   public showAllHours: boolean;
   public location: LatLng;
-
-
   map: GoogleMap;
   mapElement: HTMLElement;
   subscription: any;
@@ -36,13 +35,12 @@ export class MarketDetailPage implements OnInit {
     private navParams: NavParams,
     private geolocation: Geolocation,
     private googleMaps: GoogleMaps,
-    private launchNavigator: LaunchNavigator
+    private launchNavigator: LaunchNavigator,
+    private modalCtrl: ModalController
   ) {
     this.market = this.navParams.get('data');
     this.dayOfWeek = (new Date()).getDay();
     this.showAllHours = false;
-
-
   }
 
    ngOnInit() {
@@ -50,6 +48,7 @@ export class MarketDetailPage implements OnInit {
    }
 
   private initGeoLocation(){
+      //subscribe to the geolocation api
       let watch = this.geolocation.watchPosition({ maximumAge: 5000, enableHighAccuracy: false });
       this.subscription = watch.subscribe((data) => {
         if (data.coords !== undefined) {
@@ -64,6 +63,7 @@ export class MarketDetailPage implements OnInit {
   }
 
   startNavigation(){
+      //start navigation to market
       let options: LaunchNavigatorOptions = {
         destinationName: this.market.name
       };
@@ -86,12 +86,12 @@ export class MarketDetailPage implements OnInit {
     };
 
     this.map =new GoogleMap(this.mapElement, mapOptions);
-
+    //drop a marker to the market's position
     this.map.one(GoogleMapsEvent.MAP_READY)
       .then(() => {
-        // Now you can use all methods safely.
+
         this.map.addMarker({
-            title: 'Ionic',
+            title: this.market.name,
             icon: 'red',
             animation: 'DROP',
             position: {
@@ -100,6 +100,11 @@ export class MarketDetailPage implements OnInit {
             }
           });
       });
+  }
+
+  showRatingDialog(){
+      const modal = this.modalCtrl.create(RatingDialogComponent, null);
+      modal.present();
   }
 
   toggleShowAllHours() {

@@ -1,0 +1,22 @@
+<span *ngIf="rating">
+<ion-icon *ngFor="let color of colors" [color]="color" name="logo-euro" small></ion-icon>
+<ng-container *ngIf="showText" [ngSwitch]="roundedRating">
+    -
+    <ng-container *ngSwitchCase="1">
+        Cheap
+    </ng-container>
+    <ng-container *ngSwitchCase="2">
+        Rather cheap
+    </ng-container>
+    <ng-container *ngSwitchCase="3">
+        Average price
+    </ng-container>
+    <ng-container *ngSwitchCase="4">
+        Rather expensive
+    </ng-container>
+    <ng-container *ngSwitchCase="5">
+        Expensive
+    </ng-container>
+</ng-container>
+</span>
+<span *ngIf="!rating">no ratings yet</span>

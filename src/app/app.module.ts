@@ -23,6 +23,8 @@ import { OpeningHoursPipe } from "../pipes/openinghours.pipe";
 import { RatingsComponent } from "../components/ratings/ratings.component";
 import { GoogleMaps } from "@ionic-native/google-maps";
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { PriceCategoryComponent } from "../components/pricecategory/pricecategory.component";
+import { RatingDialogComponent } from "../pages/marketdetail/ratingdialog/ratingdialog.component";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
     OpeningHourStatePipe,
     MinutePipe,
     RatingsComponent,
-    OpeningHoursPipe
+    OpeningHoursPipe,
+    PriceCategoryComponent,
+    RatingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,8 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
     MapPage,
     ListPage,
     MarketoverviewPage,
-    MarketDetailPage
+    MarketDetailPage,
+    RatingDialogComponent
   ],
   providers: [
     ChristmasMarketService,

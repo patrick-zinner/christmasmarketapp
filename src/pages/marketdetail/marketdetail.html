@@ -85,13 +85,13 @@ col-8
       <ion-item>
         <ion-icon [color]="'primary'" name="cash" item-start></ion-icon>
         <p>
-          €€€ - rather expensive
+         <price-category [rating]="market.ratingPrice"></price-category>
         </p>
       </ion-item>
     </ion-card-content>
     <ion-row>
       <ion-col>
-        <button ion-button icon-left clear small>
+        <button ion-button icon-left clear small (click)="showRatingDialog()">
         <ion-icon name="star"></ion-icon>
         <div>Rate this market</div>
       </button>
