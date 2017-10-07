@@ -15,5 +15,21 @@
 }
 
 .day-label {
-    text-align: right;
+  text-align: right;
+}
+
+marketdetail {
+  .card-title-md {
+    font-size: 1.8rem;
+  }
+
+  p {
+    color: #000 !important;
+  }
+
+ .fab-icon {
+    margin-top: 10px;
+    margin-right: 10px;
+    z-index: 50;
+  }
 }

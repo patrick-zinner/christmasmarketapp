@@ -20,6 +20,7 @@ import { DatePipe } from "@angular/common";
 import { MarketDetailPage } from "../pages/marketdetail/marketdetail";
 import { MinutePipe } from "../pipes/minutes.pipe";
 import { OpeningHoursPipe } from "../pipes/openinghours.pipe";
+import { RatingsComponent } from "../components/ratings/ratings.component";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { OpeningHoursPipe } from "../pipes/openinghours.pipe";
     DistanceUnitPipe,
     OpeningHourStatePipe,
     MinutePipe,
+    RatingsComponent,
     OpeningHoursPipe
   ],
   imports: [

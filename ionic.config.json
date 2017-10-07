@@ -2,6 +2,7 @@
   "name": "christmasmarketsapp",
   "app_id": "",
   "type": "ionic-angular",
+  "tabSubPages": "false",
   "integrations": {
     "cordova": {}
   }

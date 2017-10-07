@@ -2,14 +2,12 @@
 
 import { Pipe, PipeTransform } from "@angular/core";
 import { Christmasmarket } from "../model/christmasmarket";
-import { DatePipe } from "@angular/common";
 import { MinutePipe } from "./minutes.pipe";
 
 @Pipe({ name: 'openinghours' })
 export class OpeningHoursPipe implements PipeTransform {
 
   constructor(
-    private datePipe: DatePipe,
     private minutePipe: MinutePipe
   ) {
 

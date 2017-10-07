@@ -3,7 +3,7 @@ import {LatLng} from '../../model/latlng';
 import {ChristmasMarketService} from '../../services/christmasmarketservice';
 import {OnInit} from '@angular/core';
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, IonicApp, App} from 'ionic-angular';
 import {Geolocation} from '@ionic-native/geolocation';
 import { OpeninghoursService } from "../../services/openinghoursservice";
 import { MarketDetailPage } from "../marketdetail/marketdetail";
@@ -23,7 +23,8 @@ export class ListPage implements OnInit {
     private christmasmarketService: ChristmasMarketService,
     public navCtrl: NavController,
     private openinghoursService: OpeninghoursService,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private app: App
   ) {
 
     let watch = this.geolocation.watchPosition({ maximumAge: 5000, enableHighAccuracy: false });
@@ -36,9 +37,10 @@ export class ListPage implements OnInit {
 
   }
 
-  public onClickMarket(market){
-      
-      this.navCtrl.push(MarketDetailPage, {data: market});
+  public onClickMarket(market) {
+
+    this.app.getRootNav().push(MarketDetailPage, { data: market });
+    //this.navCtrl.push(MarketDetailPage, {data: market});
   }
 
   initCache() {

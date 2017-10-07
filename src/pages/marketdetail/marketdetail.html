@@ -1,6 +1,7 @@
+col-8
 <ion-header>
-  <ion-navbar>
-    {{market.name}}
+  <ion-navbar color="primary">
+    <ion-title>{{market.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,106 +10,131 @@
   <ion-card>
 
     <ion-card-content>
-      <ion-card-title>
+     <!-- <ion-card-title>
         {{market.name}}
-      </ion-card-title>
-
+    </ion-card-title>-->
+      <ion-fab right top class="fab-icon" color="secondary">
+        <button ion-fab color="secondary">
+         <ion-icon name="information" large></ion-icon>
+       </button>
+      </ion-fab>
       <ion-item>
-        <ion-icon name="calendar" item-start>
+        <ion-icon [color]="'primary'" name="calendar" item-start></ion-icon>
+        <p>
+          {{market.start | date:'shortDate'}} - {{market.end | date:'shortDate'}}
+        </p>
+      </ion-item>
+      <ion-item (click)="toggleShowAllHours()">
+        <ion-icon [color]="'primary'" name="clock" item-start></ion-icon>
+        <p>
+          Today: {{market | openinghours:dayOfWeek}}
+
+        </p>
+        <ion-icon [name]="showAllHours ? 'arrow-dropup' : 'arrow-dropdown'" medium item-end >
         </ion-icon>
-        {{market.start | date:'shortDate'}} - {{market.end | date:'shortDate'}}
       </ion-item>
 
+      <ion-item [hidden]="!showAllHours">
+        <p>
+          <ion-grid>
+
+            <ion-row>
+              <ion-col col-4>Mon:</ion-col>
+              <ion-col col-8>{{market | openinghours:1}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>Tue:</ion-col>
+              <ion-col col-8>{{market | openinghours:2}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>Wed:</ion-col>
+              <ion-col col-8>{{market | openinghours:3}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>Thu:</ion-col>
+              <ion-col col-8>{{market | openinghours:4}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>Fri:</ion-col>
+              <ion-col col-8>{{market | openinghours:5}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>Sat:</ion-col>
+              <ion-col col-8>{{market | openinghours:6}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>Sun:</ion-col>
+              <ion-col col-8>{{market | openinghours:0}}</ion-col>
+            </ion-row>
+            <ion-row *ngFor="let extraordinaryOpeningHour of market.extraordinaryOpeningHours">
+              <ion-col col-4>{{extraordinaryOpeningHour.date | date:'shortDate'}}:</ion-col>
+              <ion-col col-8>
+                <ng-container *ngIf="extraordinaryOpeningHour.open">
+                  {{extraordinaryOpeningHour.start | minutes}} - {{extraordinaryOpeningHour.end | minutes}}
+                </ng-container>
+                <ng-container *ngIf="!extraordinaryOpeningHour.open">
+                  Closed
+                </ng-container>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </p>
+      </ion-item>
       <ion-item>
-        <ion-icon name="pin" item-start item-top>
-        </ion-icon>
-        {{market.address}}
+        <ion-icon [color]="'primary'" name="heart-outline" item-start></ion-icon>
+        <p>
+          <ratings [rating]="2.8" [numberRatings]="10"></ratings>
+        </p>
       </ion-item>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col col-6>
-            <ion-item style="padding-left: 5px !important;">
-              <ion-icon name="heart-outline" item-start>
-              </ion-icon>
-              <ion-icon name="star">
-              </ion-icon>
-              <ion-icon name="star">
-              </ion-icon>
-              <ion-icon name="star">
-              </ion-icon>
-              <ion-icon name="star">
-              </ion-icon>
-              <ion-icon name="star-half">
-              </ion-icon>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-icon name="cash" item-start>
-              </ion-icon>
-              <ion-icon name="logo-euro">
-              </ion-icon>
-              <ion-icon name="logo-euro">
-              </ion-icon>
-              <ion-icon name="logo-euro">
-              </ion-icon>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-
       <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-12>
-              <h2>Opening Hours</h2>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-4 class="day-label"><b>Mon:</b></ion-col>
-            <ion-col col-8>{{market | openinghours:1}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-4 class="day-label"><b>Tue:</b></ion-col>
-            <ion-col col-8>{{market | openinghours:2}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-4 class="day-label"><b>Wed:</b></ion-col>
-            <ion-col col-8>{{market | openinghours:3}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-4 class="day-label"><b>Thu:</b></ion-col>
-            <ion-col col-8>{{market | openinghours:4}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-4 class="day-label"><b>Fri:</b></ion-col>
-            <ion-col col-8>{{market | openinghours:5}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-4 class="day-label"><b>Sat:</b></ion-col>
-            <ion-col col-8>{{market | openinghours:6}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-4 class="day-label"><b>Sun:</b></ion-col>
-            <ion-col col-8>{{market | openinghours:0}}</ion-col>
-          </ion-row>
-          <ion-row *ngFor="let extraordinaryOpeningHour of market.extraordinaryOpeningHours">
-            <ion-col col-4 class="day-label"><b>{{extraordinaryOpeningHour.date | date:shortDate}}:</b></ion-col>
-            <ion-col col-8>
-              <ng-container *ngIf="extraordinaryOpeningHour.open">
-                {{extraordinaryOpeningHour.start | minutes}} - {{extraordinaryOpeningHour.end | minutes}}
-              </ng-container>
-              <ng-container *ngIf="!extraordinaryOpeningHour.open">
-                Closed
-              </ng-container>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <ion-icon [color]="'primary'" name="cash" item-start></ion-icon>
+        <p>
+          €€€ - rather expensive
+        </p>
       </ion-item>
-
-
     </ion-card-content>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+        <ion-icon name="star"></ion-icon>
+        <div>Rate this market</div>
+      </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card>
+       <div style="position: relative">
+      <ion-fab right top class="fab-icon" color="secondary">
+        <button ion-fab color="secondary">
+         <ion-icon name="pin" large></ion-icon>
+       </button>
+      </ion-fab>
+  </div>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-icon [color]="'primary'" name="pin" item-start></ion-icon>
+        <p>
+          {{market.address}}<br>
+          {{market.zipcode}} {{market.city}}<br/>
+          <ion-icon name="walk" small ></ion-icon> x km away
+        </p>
+
+      </ion-item>
+      <ion-item>
+          <div item-end style="background-color: green; height: 30vw; width: 100vw; ">
+              map
+          </div>
+      </ion-item>
+  </ion-card-content>
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small>
+      <ion-icon name="navigate"></ion-icon>
+      <div>Navigate to market</div>
+    </button>
+    </ion-col>
+  </ion-row>
   </ion-card>
 </ion-content>

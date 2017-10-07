@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController } from "ionic-angular";
+import { NavParams } from "ionic-angular";
 import { Christmasmarket } from "../../model/christmasmarket";
 
 
@@ -10,11 +10,19 @@ import { Christmasmarket } from "../../model/christmasmarket";
 export class MarketDetailPage {
 
   market: Christmasmarket;
+  dayOfWeek: number;
+  public showAllHours: boolean;
 
   constructor(
     private navParams: NavParams
   ) {
-    this.market = navParams.get('data');
+    this.market = this.navParams.get('data');
+    this.dayOfWeek = (new Date()).getDay();
+    this.showAllHours = false;
 
+  }
+
+  toggleShowAllHours(){
+      this.showAllHours = !this.showAllHours;
   }
 }

@@ -7,6 +7,8 @@ export class Christmasmarket {
   start: Date;
   end: Date;
   address: string;
+  zipcode: string;
+  city: string;
   position: LatLng;
   openingHours: NormalOpeningHours[];
   extraordinaryOpeningHours: ExtraordinaryOpeninghours[];

@@ -1,0 +1,6 @@
+<span *ngIf="numberRatings > 0">
+({{rating | number:'1.1-1'}})
+<ion-icon *ngFor="let star of stars" [name]="star"></ion-icon>
+ - {{numberRatings}} ratings
+</span>
+ <span *ngIf="numberRatings == 0">no ratings yet</span>
