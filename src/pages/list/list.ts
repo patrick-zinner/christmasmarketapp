@@ -18,6 +18,7 @@ export class ListPage implements OnInit {
   location: LatLng;
 
   openingHours: { [id: number]: boolean; } = {};
+  subscription: any;
 
   constructor(
     private christmasmarketService: ChristmasMarketService,
@@ -26,14 +27,6 @@ export class ListPage implements OnInit {
     private geolocation: Geolocation,
     private app: App
   ) {
-
-    let watch = this.geolocation.watchPosition({ maximumAge: 5000, enableHighAccuracy: false });
-    watch.subscribe((data) => {
-      if (data.coords !== undefined) {
-        this.location = { latitude: data.coords.latitude, longitude: data.coords.longitude };
-        console.log('lat: ' + data.coords.latitude + ', lon: ' + data.coords.longitude);
-      }
-    });
 
   }
 
@@ -54,16 +47,26 @@ export class ListPage implements OnInit {
     this.christmasmarketService.getMarkets().then(markets => {
       this.markets = markets;
       this.initCache();
+      this.initGeoLocation();
     });
   }
 
+  private initGeoLocation(){
+      let watch = this.geolocation.watchPosition({ maximumAge: 5000, enableHighAccuracy: false });
+      this.subscription = watch.subscribe((data) => {
+        if (data.coords !== undefined) {
+          this.location = { latitude: data.coords.latitude, longitude: data.coords.longitude };
+          console.log('lat: ' + data.coords.latitude + ', lon: ' + data.coords.longitude);
+        }
+      });
+
+  }
+
   ngOnDestroy() {
-
+    this.subscription.unsubscribe();
   }
 
-  startObservingGeolocation() {
 
-  }
 
 
 }

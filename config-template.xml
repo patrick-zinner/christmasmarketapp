@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
+<!-- rename me to config.xml and replace API keys -->
+
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
@@ -82,7 +84,7 @@
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.0.11">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBuwQKRrlDhChC93vMXbkWp-u_DguClPo4" />
+        <variable name="API_KEY_FOR_ANDROID" value="MY_API_KEY" />
     </plugin>
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
     <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />

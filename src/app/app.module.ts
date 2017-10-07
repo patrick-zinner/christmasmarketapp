@@ -21,6 +21,8 @@ import { MarketDetailPage } from "../pages/marketdetail/marketdetail";
 import { MinutePipe } from "../pipes/minutes.pipe";
 import { OpeningHoursPipe } from "../pipes/openinghours.pipe";
 import { RatingsComponent } from "../components/ratings/ratings.component";
+import { GoogleMaps } from "@ionic-native/google-maps";
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { RatingsComponent } from "../components/ratings/ratings.component";
     Geolocation,
     MinutePipe,
     OpeningHoursPipe,
+    GoogleMaps,
+    LaunchNavigator,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

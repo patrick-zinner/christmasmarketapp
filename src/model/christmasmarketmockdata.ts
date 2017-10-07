@@ -3,12 +3,15 @@ import {Christmasmarket} from './christmasmarket';
 export const MARKETS: Christmasmarket[] = [{
   id: 1,
   name: 'Altwiener Christkindlmarkt',
-  position: { latitude: 0.0, longitude: 0.0 },
+  position: { latitude: 48.208982, longitude: 16.373213},
   start: new Date(2017, 10, 25),
   end: new Date(2017, 11, 20),
   address: 'Straße 12',
   zipcode: '1010',
   city: 'Wien',
+  rating: 4.3,
+  numberOfRatings: 13,
+  ratingPrice: 3.2,
   openingHours: [
     { dayOfWeek: 0, open: true, start: 600, end: 1200 },
     { dayOfWeek: 1, open: true, start: 600, end: 1200 },

@@ -1,6 +1,6 @@
-<span *ngIf="numberRatings > 0">
-({{rating | number:'1.1-1'}})
+<span *ngIf="numberOfRatings > 0">
+<ng-container *ngIf="showText">({{rating | number:'1.1-1'}})</ng-container>
 <ion-icon *ngFor="let star of stars" [name]="star"></ion-icon>
- - {{numberRatings}} ratings
+ <ng-container *ngIf="showText"> - {{numberOfRatings}} ratings</ng-container>
 </span>
- <span *ngIf="numberRatings == 0">no ratings yet</span>
+ <span *ngIf="numberOfRatings == 0 ">no ratings yet</span>

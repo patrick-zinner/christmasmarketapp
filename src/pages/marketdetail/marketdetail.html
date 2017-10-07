@@ -10,9 +10,6 @@ col-8
   <ion-card>
 
     <ion-card-content>
-     <!-- <ion-card-title>
-        {{market.name}}
-    </ion-card-title>-->
       <ion-fab right top class="fab-icon" color="secondary">
         <button ion-fab color="secondary">
          <ion-icon name="information" large></ion-icon>
@@ -28,7 +25,6 @@ col-8
         <ion-icon [color]="'primary'" name="clock" item-start></ion-icon>
         <p>
           Today: {{market | openinghours:dayOfWeek}}
-
         </p>
         <ion-icon [name]="showAllHours ? 'arrow-dropup' : 'arrow-dropdown'" medium item-end >
         </ion-icon>
@@ -83,7 +79,7 @@ col-8
       <ion-item>
         <ion-icon [color]="'primary'" name="heart-outline" item-start></ion-icon>
         <p>
-          <ratings [rating]="2.8" [numberRatings]="10"></ratings>
+          <ratings [rating]="market.rating" [numberOfRatings]="market.numberOfRatings"></ratings>
         </p>
       </ion-item>
       <ion-item>
@@ -118,19 +114,19 @@ col-8
         <p>
           {{market.address}}<br>
           {{market.zipcode}} {{market.city}}<br/>
-          <ion-icon name="walk" small ></ion-icon> x km away
+          <ion-icon name="walk" small ></ion-icon> {{market.position | distance:location | distanceunit}} away
         </p>
 
       </ion-item>
       <ion-item>
-          <div item-end style="background-color: green; height: 30vw; width: 100vw; ">
-              map
+          <div id="map" #map style="height: 30vw; width: 100vw; ">
+
           </div>
       </ion-item>
   </ion-card-content>
   <ion-row>
     <ion-col>
-      <button ion-button icon-left clear small>
+      <button ion-button icon-left clear small (click)="startNavigation()">
       <ion-icon name="navigate"></ion-icon>
       <div>Navigate to market</div>
     </button>

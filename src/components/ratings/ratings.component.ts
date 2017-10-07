@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from "@angular/core";
 export class RatingsComponent implements OnInit {
 
     @Input() rating: number;
-    @Input() numberRatings: number;
+    @Input() numberOfRatings: number;
+    @Input() showText: boolean = true;
 
     stars: Array<string>;
 

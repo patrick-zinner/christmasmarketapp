@@ -8,6 +8,7 @@
 *.tmp.*
 log.txt
 .project
+config.xml
 .editorconfig
 *.sublime-project
 *.sublime-workspace
