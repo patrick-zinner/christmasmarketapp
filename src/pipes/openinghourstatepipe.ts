@@ -22,7 +22,7 @@ export class OpeningHourStatePipe implements PipeTransform {
     if (market) {
       if (market.start.getTime() > now) {
         //let oh = this.openinghoursService.getOpeningHoursForTime(market, market.start);
-        return 'Market not yet started. It will start at ' + this.datepipe.transform(market.start, 'shortDate') + '.';
+        return 'Market will start at ' + this.datepipe.transform(market.start, 'shortDate') + '.';
       } else if (market.end.getTime() < now) {
         return 'Market is already closed for this year.'
       } else {

@@ -1,4 +1,4 @@
-import {NgModule, ErrorHandler} from '@angular/core';
+import {NgModule, ErrorHandler, forwardRef} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
@@ -25,6 +25,8 @@ import { GoogleMaps } from "@ionic-native/google-maps";
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { PriceCategoryComponent } from "../components/pricecategory/pricecategory.component";
 import { RatingDialogComponent } from "../pages/marketdetail/ratingdialog/ratingdialog.component";
+import { RatingInputComponent } from "../components/ratinginput/ratinginput.component";
+import { NG_VALIDATORS } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { RatingDialogComponent } from "../pages/marketdetail/ratingdialog/rating
     RatingsComponent,
     OpeningHoursPipe,
     PriceCategoryComponent,
-    RatingDialogComponent
+    RatingDialogComponent,
+    RatingInputComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,8 @@ import { RatingDialogComponent } from "../pages/marketdetail/ratingdialog/rating
     GoogleMaps,
     LaunchNavigator,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
+
+
   ]
 })
 export class AppModule {}

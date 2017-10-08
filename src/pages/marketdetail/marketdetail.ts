@@ -103,7 +103,7 @@ export class MarketDetailPage implements OnInit {
   }
 
   showRatingDialog(){
-      const modal = this.modalCtrl.create(RatingDialogComponent, null);
+      const modal = this.modalCtrl.create(RatingDialogComponent, {data: this.market});
       modal.present();
   }
 

@@ -1,21 +1,32 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Tip for you</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Rate the market</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only>
-      <ion-icon name='bulb'></ion-icon>
+      <button ion-button icon-only (click)="dismiss()">
+      <ion-icon name="close"></ion-icon>
     </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <h1>Modal</h1>
-  <h3>This modal is pretty nice.</h3>
-  <p>EXAMPLES</p>
- 
+  <form #form="ngForm">
+    <b>Rate the market</b><br>
+    <rating-input [(rating)]="rating" [texts]="ratingTexts" name="rating"></rating-input>
+    <b>Rate the market's price</b><br>
+    <rating-input [(rating)]="ratingPrice" symbol="logo-euro" [texts]="ratingPriceTexts"></rating-input>
 
+  </form>
 </ion-content>
 <ion-footer>
-  <button ion-button full color="danger" (click)="dismiss()">Okay
+  <ion-row>
+    <ion-col>
+      <button [disabled]="rating == 0 || ratingPrice == 0" ion-button full color="secondary" (click)="saveRating()">
+        Save
+    </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button full color="secondary" (click)="dismiss()">Cancel
       </button>
+    </ion-col>
+  </ion-row>
 </ion-footer>

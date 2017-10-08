@@ -10,4 +10,8 @@ export class ChristmasMarketService {
     return Promise.resolve(MARKETS);
   }
 
+  rateMarket(marketId: number, rating: number, ratingPrice: number){
+      console.log('ratedMarket')
+  }
+
 }

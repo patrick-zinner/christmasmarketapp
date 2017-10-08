@@ -24,6 +24,9 @@ export class OpeninghoursService {
 
   public isOpenAt(market: Christmasmarket, time: Date): boolean {
     let nowMinutes = time.getHours() * 60 + time.getMinutes();
+    if(market.start.getTime() > time.getTime() || market.end.getTime() < time.getTime())
+        return false;
+
     let openingHours = this.getOpeningHoursForTime(market, time);
     if (openingHours.open) {
       if (openingHours.start <= nowMinutes && openingHours.end >= nowMinutes) {

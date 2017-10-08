@@ -12,8 +12,9 @@
 				<h2>{{market.name}}</h2>
 				<p>{{market.position | distance:location | distanceunit}} away</p>
 				<p class="item-text-wrap">{{market | openingstate}}</p>
+				<ratings [rating]="market.rating" [showText]="false"  [numberOfRatings]="market.numberOfRatings"></ratings>
 			</ion-label>
-			<ion-icon [name]="true ? 'checkmark-circle' : 'close-circle'" item-end [color]="true ? 'green' : 'red'">
+			<ion-icon [name]="openingHours[market.id] ? 'checkmark-circle' : 'close-circle'" item-end [color]="openingHours[market.id] ? 'green' : 'red'">
 			</ion-icon>
 		</ion-item>
 	</ion-list>
