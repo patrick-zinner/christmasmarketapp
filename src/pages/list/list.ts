@@ -9,7 +9,7 @@ import { OpeninghoursService } from "../../services/openinghoursservice";
 import { MarketDetailPage } from "../marketdetail/marketdetail";
 
 @Component({
-  selector: 'page-home',
+  selector: 'list',
   templateUrl: 'list.html'
 })
 export class ListPage implements OnInit {

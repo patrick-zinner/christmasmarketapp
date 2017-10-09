@@ -10,9 +10,12 @@
 		<ion-item detail-push *ngFor="let market of markets" (click)="onClickMarket(market)">
 			<ion-label>
 				<h2>{{market.name}}</h2>
-				<p>{{market.position | distance:location | distanceunit}} away</p>
 				<p class="item-text-wrap">{{market | openingstate}}</p>
 				<ratings [rating]="market.rating" [showText]="false"  [numberOfRatings]="market.numberOfRatings"></ratings>
+				-
+				<price-category [rating]="market.ratingPrice" [showText]="false"></price-category>
+				-
+				<ion-icon name="navigate" small></ion-icon ><span class="distance">\u00A0{{market.position | distance:location | distanceunit}}</span>
 			</ion-label>
 			<ion-icon [name]="openingHours[market.id] ? 'checkmark-circle' : 'close-circle'" item-end [color]="openingHours[market.id] ? 'green' : 'red'">
 			</ion-icon>
