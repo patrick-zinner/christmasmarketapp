@@ -27,6 +27,7 @@ import { PriceCategoryComponent } from "../components/pricecategory/pricecategor
 import { RatingDialogComponent } from "../pages/marketdetail/ratingdialog/ratingdialog.component";
 import { RatingInputComponent } from "../components/ratinginput/ratinginput.component";
 import { NG_VALIDATORS } from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { NG_VALIDATORS } from "@angular/forms";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

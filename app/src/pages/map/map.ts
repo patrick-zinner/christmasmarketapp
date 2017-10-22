@@ -42,7 +42,7 @@ export class MapPage {
     //drop a marker to the market's position
     this.map.one(GoogleMapsEvent.MAP_READY)
       .then(() => {
-          this.christmasMarketService.getMarkets().then(markets => {
+          this.christmasMarketService.getMarkets().subscribe(markets => {
               markets.forEach(market => {
                   this.map.addMarker({
                     title: market.name,

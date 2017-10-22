@@ -7,7 +7,7 @@ export class Christmasmarket {
   start: Date;
   end: Date;
   address: string;
-  zipcode: string;
+  postalCode: string;
   city: string;
   rating: number;
   numberOfRatings: number;

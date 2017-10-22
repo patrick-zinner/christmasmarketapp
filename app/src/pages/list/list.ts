@@ -44,7 +44,7 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
-    this.christmasmarketService.getMarkets().then(markets => {
+    this.christmasmarketService.getMarkets().subscribe(markets => {
       this.markets = markets;
       this.initCache();
       this.initGeoLocation();
