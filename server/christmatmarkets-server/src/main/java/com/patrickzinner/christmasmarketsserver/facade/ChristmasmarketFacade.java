@@ -11,11 +11,14 @@ import org.springframework.stereotype.Component;
 
 import com.patrickzinner.christmasmarketsserver.model.Christmasmarket;
 import com.patrickzinner.christmasmarketsserver.model.ExtraordinaryOpeningHours;
+import com.patrickzinner.christmasmarketsserver.model.MarketRating;
 import com.patrickzinner.christmasmarketsserver.model.NormalOpeningHours;
 import com.patrickzinner.christmasmarketsserver.rest.dto.ChristmasmarketDto;
 import com.patrickzinner.christmasmarketsserver.rest.dto.ExtraordinaryOpeningHoursDto;
 import com.patrickzinner.christmasmarketsserver.rest.dto.LatLngDto;
 import com.patrickzinner.christmasmarketsserver.rest.dto.NormalOpeningHoursDto;
+import com.patrickzinner.christmasmarketsserver.rest.dto.RatingDto;
+import com.patrickzinner.christmasmarketsserver.rest.dto.SingleRatingDto;
 import com.patrickzinner.christmasmarketsserver.service.ChristmasmarketService;
 import com.patrickzinner.christmasmarketsserver.service.model.RatingAverage;
 
@@ -58,6 +61,27 @@ public class ChristmasmarketFacade {
 		result.setOpeningHours(
 				entity.getOpeningHours().stream().map(this::mapEntityToDto).collect(Collectors.toList()));
 
+		return result;
+	}
+
+	public ChristmasmarketDto rateChristmasMarket(RatingDto rating) {
+		MarketRating entity = this.christmasmarketService.rateMarket(rating.getMarketId(), rating.getUserId(),
+				rating.getRating(), rating.getRatingPrice());
+		return mapEntityToDto(entity.getMarket());
+	}
+
+	public SingleRatingDto findRating(long marketId, String userId) {
+		Christmasmarket market = this.christmasmarketService.findChristmasMarket(marketId);
+		MarketRating rating = this.christmasmarketService.findRating(userId, market);
+		
+		SingleRatingDto result = null;
+		
+		if(rating != null) {
+			result = new SingleRatingDto();
+			result.setRating(rating.getNormalRating());
+			result.setRatingPrice(rating.getPriceRating());
+		}
+		
 		return result;
 	}
 

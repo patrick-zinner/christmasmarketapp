@@ -28,6 +28,8 @@ import { RatingDialogComponent } from "../pages/marketdetail/ratingdialog/rating
 import { RatingInputComponent } from "../components/ratinginput/ratinginput.component";
 import { NG_VALIDATORS } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from "@ionic/storage/es2015";
+import { UserService } from "../services/user.service";
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -72,9 +75,10 @@ import { HttpClientModule } from '@angular/common/http';
     OpeningHoursPipe,
     GoogleMaps,
     LaunchNavigator,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    UserService,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
 
 
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,3 +1,4 @@
+
 <span *ngIf="numberOfRatings > 0">
 <ng-container *ngIf="showText">({{rating | number:'1.1-1'}})</ng-container>
 <ion-icon *ngFor="let star of stars" [name]="star"></ion-icon>

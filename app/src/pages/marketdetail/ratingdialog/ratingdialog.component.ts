@@ -22,7 +22,7 @@ export class RatingDialogComponent implements OnInit {
   constructor(
     private viewCtrl: ViewController,
     private navParams: NavParams,
-    private christmasMarketService: ChristmasMarketService
+    private christmasMarketService: ChristmasMarketService,
   ) {
 
   }
@@ -31,6 +31,16 @@ export class RatingDialogComponent implements OnInit {
     this.market = this.navParams.get('data');
     this.rating = 0;
     this.ratingPrice = 0;
+
+    this.christmasMarketService.findRatingOfMarket(this.market.id).then(rating => {
+      console.log('test ' + rating);
+      if (rating) {
+        this.rating = rating.rating;
+        this.ratingPrice = rating.ratingPrice;
+      }
+    }).catch(e => {
+      
+    });
   }
 
   dismiss() {
@@ -41,6 +51,8 @@ export class RatingDialogComponent implements OnInit {
     this.christmasMarketService.rateMarket(this.market.id, this.rating, this.ratingPrice);
     this.dismiss();
   }
+
+
 
 
 }

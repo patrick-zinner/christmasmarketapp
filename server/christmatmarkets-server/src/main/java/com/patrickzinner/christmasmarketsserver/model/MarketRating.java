@@ -26,6 +26,10 @@ public class MarketRating extends AbstractEntity {
 	@NotNull
 	private Integer priceRating;
 
+	@Column
+	@NotNull
+	private String userId;
+
 	public Integer getNormalRating() {
 		return normalRating;
 	}
@@ -41,13 +45,20 @@ public class MarketRating extends AbstractEntity {
 	public void setPriceRating(Integer priceRating) {
 		this.priceRating = priceRating;
 	}
-	
+
 	public void setMarket(Christmasmarket market) {
 		this.market = market;
 	}
-	
+
 	public Christmasmarket getMarket() {
 		return market;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserId() {
+		return userId;
 	}
 
 }
