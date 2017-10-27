@@ -33,13 +33,13 @@ export class RatingDialogComponent implements OnInit {
     this.ratingPrice = 0;
 
     this.christmasMarketService.findRatingOfMarket(this.market.id).then(rating => {
-      console.log('test ' + rating);
+      
       if (rating) {
         this.rating = rating.rating;
         this.ratingPrice = rating.ratingPrice;
       }
     }).catch(e => {
-      
+
     });
   }
 

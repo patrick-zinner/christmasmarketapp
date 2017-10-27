@@ -15,10 +15,12 @@ import { MarketDetailPage } from "../marketdetail/marketdetail";
 export class ListPage implements OnInit {
 
   markets: Christmasmarket[];
+  allMarkets: Christmasmarket[];
   location: LatLng;
 
   openingHours: { [id: number]: boolean; } = {};
   subscription: any;
+  searchText: string;
 
   constructor(
     private christmasmarketService: ChristmasMarketService,
@@ -46,6 +48,7 @@ export class ListPage implements OnInit {
   ngOnInit() {
     this.christmasmarketService.getMarkets().subscribe(markets => {
       this.markets = markets;
+      this.allMarkets = markets;
       this.initCache();
       this.initGeoLocation();
     });
@@ -59,6 +62,18 @@ export class ListPage implements OnInit {
           console.log('lat: ' + data.coords.latitude + ', lon: ' + data.coords.longitude);
         }
       });
+
+  }
+
+  onSearchChange(){
+      console.log(this.searchText);
+      if(this.searchText != null && this.searchText.length > 0){
+          this.markets = this.allMarkets.filter(market => {
+              return market.name.toLowerCase().indexOf(this.searchText.toLowerCase()) >= 0;
+          });
+      }else{
+          this.markets = this.allMarkets;
+      }
 
   }
 
