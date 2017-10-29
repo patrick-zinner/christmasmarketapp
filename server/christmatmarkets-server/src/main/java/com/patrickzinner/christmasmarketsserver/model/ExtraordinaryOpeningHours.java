@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +41,12 @@ public class ExtraordinaryOpeningHours extends AbstractOpeningHours {
 	
 	public Christmasmarket getMarket() {
 		return market;
+	}
+	
+	@PrePersist
+	@PreUpdate
+	public void onCreateOrUpdate() {
+		this.market.setLastUpdate(new Date());
 	}
 
 }

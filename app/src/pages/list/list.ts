@@ -3,7 +3,7 @@ import {LatLng} from '../../model/latlng';
 import {ChristmasMarketService} from '../../services/christmasmarketservice';
 import {OnInit} from '@angular/core';
 import {Component} from '@angular/core';
-import {NavController, IonicApp, App} from 'ionic-angular';
+import {NavController, App} from 'ionic-angular';
 import {Geolocation} from '@ionic-native/geolocation';
 import { OpeninghoursService } from "../../services/openinghoursservice";
 import { MarketDetailPage } from "../marketdetail/marketdetail";
@@ -46,34 +46,37 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
-    this.christmasmarketService.getMarkets().subscribe(markets => {
+
+
+    this.christmasmarketService.getData.subscribe(markets => {
       this.markets = markets;
       this.allMarkets = markets;
       this.initCache();
-      this.initGeoLocation();
     });
+    this.christmasmarketService.getMarkets();
+
+    this.initGeoLocation();
   }
 
-  private initGeoLocation(){
-      let watch = this.geolocation.watchPosition({ maximumAge: 5000, enableHighAccuracy: false });
-      this.subscription = watch.subscribe((data) => {
-        if (data.coords !== undefined) {
-          this.location = { latitude: data.coords.latitude, longitude: data.coords.longitude };
-          console.log('lat: ' + data.coords.latitude + ', lon: ' + data.coords.longitude);
-        }
-      });
-
-  }
-
-  onSearchChange(){
-      console.log(this.searchText);
-      if(this.searchText != null && this.searchText.length > 0){
-          this.markets = this.allMarkets.filter(market => {
-              return market.name.toLowerCase().indexOf(this.searchText.toLowerCase()) >= 0;
-          });
-      }else{
-          this.markets = this.allMarkets;
+  private initGeoLocation() {
+    let watch = this.geolocation.watchPosition({ maximumAge: 5000, enableHighAccuracy: false });
+    this.subscription = watch.subscribe((data) => {
+      if (data.coords !== undefined) {
+        this.location = { latitude: data.coords.latitude, longitude: data.coords.longitude };
       }
+    });
+
+  }
+
+  onSearchChange() {
+    console.log(this.searchText);
+    if (this.searchText != null && this.searchText.length > 0) {
+      this.markets = this.allMarkets.filter(market => {
+        return market.name.toLowerCase().indexOf(this.searchText.toLowerCase()) >= 0;
+      });
+    } else {
+      this.markets = this.allMarkets;
+    }
 
   }
 

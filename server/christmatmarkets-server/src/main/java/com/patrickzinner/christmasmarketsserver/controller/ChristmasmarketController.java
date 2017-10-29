@@ -1,8 +1,11 @@
 package com.patrickzinner.christmasmarketsserver.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +33,15 @@ public class ChristmasmarketController {
 		List<ChristmasmarketDto> markets = this.christmasmarketFacade.findAll();
 		result.setResults(markets);
 		return result;
+	}
 
+	@ResponseBody
+	@RequestMapping(value = "/{lastupdate}", method = RequestMethod.GET)
+	public ResultWrapper getAllChristmasmarkets(@PathVariable("lastupdate") @DateTimeFormat(iso=ISO.DATE_TIME) Date lastUpdate) {
+		ResultWrapper result = new ResultWrapper();
+		List<ChristmasmarketDto> markets = this.christmasmarketFacade.findAll();
+		result.setResults(markets);
+		return result;
 	}
 
 	@ResponseBody

@@ -6,12 +6,10 @@ import { ListPage } from '../list/list';
 @Component({
   templateUrl: 'marketoverview.html'
 })
-export class MarketoverviewPage {
+export class MarketoverviewPage{
+
 
   tabList = ListPage;
   tabMap = MapPage;
 
-  constructor() {
-
-  }
 }

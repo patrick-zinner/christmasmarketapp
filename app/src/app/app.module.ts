@@ -1,4 +1,4 @@
-import {NgModule, ErrorHandler, forwardRef} from '@angular/core';
+import {NgModule, ErrorHandler} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
@@ -26,10 +26,10 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { PriceCategoryComponent } from "../components/pricecategory/pricecategory.component";
 import { RatingDialogComponent } from "../pages/marketdetail/ratingdialog/ratingdialog.component";
 import { RatingInputComponent } from "../components/ratinginput/ratinginput.component";
-import { NG_VALIDATORS } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from "@ionic/storage/es2015";
 import { UserService } from "../services/user.service";
+import { MarketSortPipe } from "../pipes/market-sort";
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { UserService } from "../services/user.service";
     DistancePipe,
     DistanceUnitPipe,
     OpeningHourStatePipe,
+    MarketSortPipe,
     MinutePipe,
     RatingsComponent,
     OpeningHoursPipe,
@@ -72,7 +73,9 @@ import { UserService } from "../services/user.service";
     SplashScreen,
     Geolocation,
     MinutePipe,
+    DistancePipe,
     OpeningHoursPipe,
+    MarketSortPipe,
     GoogleMaps,
     LaunchNavigator,
     UserService,

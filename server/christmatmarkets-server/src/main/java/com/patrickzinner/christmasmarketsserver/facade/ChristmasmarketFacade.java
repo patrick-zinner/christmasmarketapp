@@ -1,5 +1,6 @@
 package com.patrickzinner.christmasmarketsserver.facade;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,9 +29,15 @@ public class ChristmasmarketFacade {
 
 	@Autowired
 	private ChristmasmarketService christmasmarketService;
+	
 
 	public List<ChristmasmarketDto> findAll() {
 		List<Christmasmarket> entities = this.christmasmarketService.findAll();
+		return entities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
+	}
+	
+	public List<ChristmasmarketDto> findUpdatedMarkets(Date lastTimeUpdate) {
+		List<Christmasmarket> entities = this.christmasmarketService.findUpdatedMarkets(lastTimeUpdate);
 		return entities.stream().map(this::mapEntityToDto).collect(Collectors.toList());
 	}
 
@@ -106,5 +113,5 @@ public class ChristmasmarketFacade {
 
 		return result;
 	}
-
+	
 }

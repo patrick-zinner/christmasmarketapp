@@ -1,10 +1,14 @@
 package com.patrickzinner.christmasmarketsserver.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +38,12 @@ public class NormalOpeningHours extends AbstractOpeningHours {
 
 	public Christmasmarket getMarket() {
 		return market;
+	}
+	
+	@PrePersist
+	@PreUpdate
+	public void onCreateOrUpdate() {
+		this.market.setLastUpdate(new Date());
 	}
 
 }

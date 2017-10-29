@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ViewController, NavParams } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { Christmasmarket } from "../../../model/christmasmarket";
 import { ChristmasMarketService } from "../../../services/christmasmarketservice";
 
@@ -33,7 +33,7 @@ export class RatingDialogComponent implements OnInit {
     this.ratingPrice = 0;
 
     this.christmasMarketService.findRatingOfMarket(this.market.id).then(rating => {
-      
+
       if (rating) {
         this.rating = rating.rating;
         this.ratingPrice = rating.ratingPrice;

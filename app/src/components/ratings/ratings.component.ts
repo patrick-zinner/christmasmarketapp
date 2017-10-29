@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook";
 
 @Component({
   selector: 'ratings',
@@ -10,6 +9,7 @@ export class RatingsComponent implements OnInit {
   @Input() rating: number;
   @Input() numberOfRatings: number;
   @Input() showText: boolean = true;
+  @Input() noRatingsText = 'no ratings yet';
 
   stars: Array<string>;
 

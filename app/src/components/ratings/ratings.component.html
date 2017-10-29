@@ -4,4 +4,4 @@
 <ion-icon *ngFor="let star of stars" [name]="star"></ion-icon>
  <ng-container *ngIf="showText"> - {{numberOfRatings}} ratings</ng-container>
 </span>
- <span *ngIf="numberOfRatings == 0 ">no ratings yet</span>
+ <span *ngIf="numberOfRatings == 0 ">{{noRatingsText}}</span>

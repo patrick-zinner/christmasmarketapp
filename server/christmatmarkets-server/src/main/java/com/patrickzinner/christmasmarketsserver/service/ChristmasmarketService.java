@@ -1,5 +1,6 @@
 package com.patrickzinner.christmasmarketsserver.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class ChristmasmarketService {
 
 	public List<Christmasmarket> findAll() {
 		return this.christmasmarketRepository.findAll();
+	}
+	
+	public List<Christmasmarket> findUpdatedMarkets(Date minLastUpdated){
+		return this.christmasmarketRepository.findByLastUpdateAfter(minLastUpdated);
 	}
 
 	public RatingAverage calculateRating(Christmasmarket market) {

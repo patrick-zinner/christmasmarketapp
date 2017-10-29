@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,11 +23,11 @@ public class Christmasmarket extends AbstractEntity {
 	@Column
 	private String name;
 
-	@Column(name="start_date")
+	@Column(name = "start_date")
 	@Temporal(TemporalType.DATE)
 	private Date start;
 
-	@Column(name="end_date")
+	@Column(name = "end_date")
 	@Temporal(TemporalType.DATE)
 	private Date end;
 
@@ -40,12 +42,16 @@ public class Christmasmarket extends AbstractEntity {
 	@Embedded
 	private LatLng position;
 
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastUpdate;
+
 	@OneToMany(mappedBy = "market")
 	private List<NormalOpeningHours> openingHours = new ArrayList<>();
 
 	@OneToMany(mappedBy = "market")
 	private List<ExtraordinaryOpeningHours> extraordinaryOpeningHours = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "market")
 	private List<MarketRating> ratings = new ArrayList<>();
 
@@ -120,13 +126,27 @@ public class Christmasmarket extends AbstractEntity {
 	public void setExtraordinaryOpeningHours(List<ExtraordinaryOpeningHours> extraordinaryOpeningHours) {
 		this.extraordinaryOpeningHours = extraordinaryOpeningHours;
 	}
-	
+
 	public void setRatings(List<MarketRating> ratings) {
 		this.ratings = ratings;
 	}
-	
+
 	public List<MarketRating> getRatings() {
 		return ratings;
+	}
+
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+	
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+	
+	@PrePersist
+	@PreUpdate
+	public void onCreateOrUpdate() {
+		this.lastUpdate = new Date();
 	}
 
 }

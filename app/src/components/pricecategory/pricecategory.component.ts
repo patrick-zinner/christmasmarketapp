@@ -8,6 +8,7 @@ export class PriceCategoryComponent implements OnInit {
 
   @Input() rating: number;
   @Input() showText: boolean = true;
+  @Input() noRatingsText = 'no ratings yet';
 
   roundedRating: number;
   colors: Array<string>;

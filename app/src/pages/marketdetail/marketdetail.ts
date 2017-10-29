@@ -1,20 +1,17 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavParams, ModalController } from "ionic-angular";
 import { Christmasmarket } from "../../model/christmasmarket";
 import {Geolocation} from '@ionic-native/geolocation';
 import { LatLng } from "../../model/latlng";
 import {OnInit} from '@angular/core';
 import {
-  GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
-  GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker
+  GoogleMapOptions
 } from '@ionic-native/google-maps';
 import { LaunchNavigator, LaunchNavigatorOptions } from "@ionic-native/launch-navigator";
 import { RatingDialogComponent } from "./ratingdialog/ratingdialog.component";
+import { ChristmasMarketService } from "../../services/christmasmarketservice";
 
 
 @Component({
@@ -34,9 +31,10 @@ export class MarketDetailPage implements OnInit {
   constructor(
     private navParams: NavParams,
     private geolocation: Geolocation,
-    private googleMaps: GoogleMaps,
     private launchNavigator: LaunchNavigator,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private christmasmarketService: ChristmasMarketService
+
   ) {
     this.market = this.navParams.get('data');
     this.dayOfWeek = (new Date()).getDay();
@@ -53,7 +51,6 @@ export class MarketDetailPage implements OnInit {
       this.subscription = watch.subscribe((data) => {
         if (data.coords !== undefined) {
           this.location = { latitude: data.coords.latitude, longitude: data.coords.longitude };
-          console.log('lat: ' + data.coords.latitude + ', lon: ' + data.coords.longitude);
         }
       });
   }
@@ -72,7 +69,7 @@ export class MarketDetailPage implements OnInit {
   }
 
   loadMap() {
-    this.mapElement = document.getElementById('map');
+    this.mapElement = document.getElementById('detailmap');
 
     let mapOptions: GoogleMapOptions = {
       camera: {
@@ -105,6 +102,9 @@ export class MarketDetailPage implements OnInit {
   showRatingDialog(){
       const modal = this.modalCtrl.create(RatingDialogComponent, {data: this.market});
       modal.present();
+      modal.onDidDismiss(data => {
+          this.christmasmarketService.loadMarket(this.market.id).then(market => this.market = market);
+      });
   }
 
   toggleShowAllHours() {
