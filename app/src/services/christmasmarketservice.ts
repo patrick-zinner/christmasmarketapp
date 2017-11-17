@@ -27,7 +27,7 @@ export class ChristmasMarketService {
 
 
 
-  apiUrl: string = 'http://192.168.1.170:8080/christmasmarkets'
+  apiUrl: string = 'http://127.0.0.1:8080/christmasmarkets/christmasmarkets'
 
 
   getMarkets() {
@@ -78,16 +78,16 @@ export class ChristmasMarketService {
     });
   }
 
-  rateMarket(marketId: number, rating: number, ratingPrice: number) {
-    this.userService.getAndCreateUser().then(user => {
+  rateMarket(marketId: number, rating: number, ratingPrice: number) : Promise<Christmasmarket> {
+      return this.userService.getAndCreateUser().then(user => {
       let requestObj = {
         marketId: marketId,
         userId: user.uniqueId,
         rating: rating,
         ratingPrice: ratingPrice
-      };
+    };
 
-      this.http.post(this.apiUrl + '/rate', requestObj).subscribe((market:Christmasmarket) => {
+     let observable = this.http.post<Christmasmarket>(this.apiUrl + '/rate', requestObj).map((market:Christmasmarket) => {
           this.loadMarketsFromStorage().then(allMarkets => {
               for(let i = 0; i < allMarkets.length; i++){
                   if(allMarkets[i].id == market.id){
@@ -98,8 +98,12 @@ export class ChristmasMarketService {
               }
               this.storage.set('markets', allMarkets);
               this.getDataObserver.next(allMarkets);
+              return market;
           });
+          this.remapDates(market);
+          return market;
       });
+      return observable.toPromise();
     });
   }
 

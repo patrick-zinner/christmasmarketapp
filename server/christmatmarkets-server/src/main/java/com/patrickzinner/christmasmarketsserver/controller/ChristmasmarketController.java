@@ -3,6 +3,8 @@ package com.patrickzinner.christmasmarketsserver.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.patrickzinner.christmasmarketsserver.facade.ChristmasmarketFacade;
+import com.patrickzinner.christmasmarketsserver.facade.CreateTestdataFacade;
 import com.patrickzinner.christmasmarketsserver.rest.dto.ChristmasmarketDto;
 import com.patrickzinner.christmasmarketsserver.rest.dto.RatingDto;
 import com.patrickzinner.christmasmarketsserver.rest.dto.ResultWrapper;
@@ -26,14 +29,28 @@ public class ChristmasmarketController {
 	@Autowired
 	private ChristmasmarketFacade christmasmarketFacade;
 
+	private static final Logger logger = LoggerFactory.getLogger(ChristmasmarketController.class);
+	
+	@Autowired
+	private CreateTestdataFacade test;
+	
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResultWrapper getAllChristmasmarkets() {
+		
+		logger.info("zur info");
+		
 		ResultWrapper result = new ResultWrapper();
 		List<ChristmasmarketDto> markets = this.christmasmarketFacade.findAll();
 		result.setResults(markets);
 		return result;
 	}
+	
+	
+	/*@RequestMapping(value="/gemma", method = RequestMethod.GET)
+	public void alles() {
+		this.test.create2();
+	}*/
 
 	@ResponseBody
 	@RequestMapping(value = "/{lastupdate}", method = RequestMethod.GET)
@@ -42,6 +59,8 @@ public class ChristmasmarketController {
 		List<ChristmasmarketDto> markets = this.christmasmarketFacade.findAll();
 		result.setResults(markets);
 		return result;
+		
+		
 	}
 
 	@ResponseBody

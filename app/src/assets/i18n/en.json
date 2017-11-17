@@ -1,0 +1,56 @@
+{
+  "MAP": "Map",
+  "LIST": "List",
+  "CLOSED": "Closed",
+  "DAYS": {
+    "TODAY": "Today",
+    "MON": "Mon",
+    "TUE": "Tue",
+    "WED": "Wed",
+    "THU": "Thu",
+    "FRI": "Fri",
+    "SAT": "Sat",
+    "SUN": "Sun"
+  },
+  "DETAILPAGE": {
+      "BUTTONRATE": "Rate this market",
+      "BUTTONNAVIGATE": "Navigate to market"
+  },
+  "RATINGS":{
+      "NORATINGSYET": "no ratings yet"
+  },
+
+  "RATINGDIALOG": {
+      "TITLE": "Rate the market",
+      "HEADERMARKET": "Rate the market",
+      "HEADERPRICE": "Rate the market's price",
+      "SAVE": "Save",
+      "CANCEL": "Cancel"
+  },
+
+  "RATINGTEXTS": {
+      "VALUE1": "very bad",
+      "VALUE2": "meh",
+      "VALUE3": "okay",
+      "VALUE4": "good",
+      "VALUE5": "awesome"
+  },
+
+  "RATINGPRICETEXTS": {
+      "VALUE1": "cheap",
+      "VALUE2": "rather cheap",
+      "VALUE3": "average price",
+      "VALUE4": "rather expensive",
+      "VALUE5": "expensive"
+  },
+
+  "OPENINGHOURS": {
+      "NOTYETSTARTED": "Market will start at  {{value}}.",
+      "ALREADYCLOSEDYEAR": "Market is already closed for this year.",
+      "OPENFROMTO": "Market open from {{start}} to {{end}}.",
+      "WILLOPENAT": "Market will open at {{start}}.",
+      "CLOSEDFORTODAY": "Market already closed for today.",
+      "CLOSEDTODAY": "Market is closed today."
+  }
+
+}

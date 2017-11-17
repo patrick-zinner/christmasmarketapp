@@ -20,6 +20,19 @@ public abstract class AbstractOpeningHours extends AbstractEntity{
 	
 	@Column(name="end_time")
 	protected Integer end;
+	
+
+	public AbstractOpeningHours() {
+		
+	}
+	
+
+	public AbstractOpeningHours(Boolean open, Integer start, Integer end) {
+		super();
+		this.open = open;
+		this.start = start;
+		this.end = end;
+	}
 
 	public Boolean getOpen() {
 		return open;

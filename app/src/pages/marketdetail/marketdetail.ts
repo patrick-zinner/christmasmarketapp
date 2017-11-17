@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ModalController } from "ionic-angular";
+import { NavParams, ModalController, ViewController, Events } from "ionic-angular";
 import { Christmasmarket } from "../../model/christmasmarket";
 import {Geolocation} from '@ionic-native/geolocation';
 import { LatLng } from "../../model/latlng";
@@ -33,7 +33,9 @@ export class MarketDetailPage implements OnInit {
     private geolocation: Geolocation,
     private launchNavigator: LaunchNavigator,
     private modalCtrl: ModalController,
-    private christmasmarketService: ChristmasMarketService
+        private viewCtrl: ViewController,
+    private christmasmarketService: ChristmasMarketService,
+    private events: Events
 
   ) {
     this.market = this.navParams.get('data');
@@ -41,31 +43,36 @@ export class MarketDetailPage implements OnInit {
     this.showAllHours = false;
   }
 
-   ngOnInit() {
-       this.initGeoLocation();
-   }
-
-  private initGeoLocation(){
-      //subscribe to the geolocation api
-      let watch = this.geolocation.watchPosition({ maximumAge: 5000, enableHighAccuracy: false });
-      this.subscription = watch.subscribe((data) => {
-        if (data.coords !== undefined) {
-          this.location = { latitude: data.coords.latitude, longitude: data.coords.longitude };
-        }
-      });
+  ngOnInit() {
+    this.initGeoLocation();
   }
+
+  private initGeoLocation() {
+    //subscribe to the geolocation api
+    let watch = this.geolocation.watchPosition({ maximumAge: 5000, enableHighAccuracy: false });
+    this.subscription = watch.subscribe((data) => {
+      if (data.coords !== undefined) {
+        this.location = { latitude: data.coords.latitude, longitude: data.coords.longitude };
+      }
+    });
+  }
+
 
   ionViewDidLoad() {
     this.loadMap();
   }
 
-  startNavigation(){
-      //start navigation to market
-      let options: LaunchNavigatorOptions = {
-        destinationName: this.market.name
-      };
+  ionViewWillLeave(){
+      this.events.publish('market-detail-closed');
+  }
 
-      this.launchNavigator.navigate([this.market.position.latitude, this.market.position.longitude], options);
+  startNavigation() {
+    //start navigation to market
+    let options: LaunchNavigatorOptions = {
+      destinationName: this.market.name
+    };
+
+    this.launchNavigator.navigate([this.market.position.latitude, this.market.position.longitude], options);
   }
 
   loadMap() {
@@ -82,29 +89,32 @@ export class MarketDetailPage implements OnInit {
       }
     };
 
-    this.map =new GoogleMap(this.mapElement, mapOptions);
+    this.map = new GoogleMap(this.mapElement, mapOptions);
     //drop a marker to the market's position
     this.map.one(GoogleMapsEvent.MAP_READY)
       .then(() => {
-
+          
         this.map.addMarker({
-            title: this.market.name,
-            icon: 'red',
-            animation: 'DROP',
-            position: {
-                lat: this.market.position.latitude,
-                lng: this.market.position.longitude
-            }
-          });
+          title: this.market.name,
+          icon: 'red',
+          animation: 'DROP',
+          position: {
+            lat: this.market.position.latitude,
+            lng: this.market.position.longitude
+          }
+        });
       });
   }
 
-  showRatingDialog(){
-      const modal = this.modalCtrl.create(RatingDialogComponent, {data: this.market});
-      modal.present();
-      modal.onDidDismiss(data => {
-          this.christmasmarketService.loadMarket(this.market.id).then(market => this.market = market);
-      });
+
+
+  showRatingDialog() {
+    const modal = this.modalCtrl.create(RatingDialogComponent, { data: this.market });
+    modal.present();
+    modal.onDidDismiss(data => {
+      this.market = data;
+    });
+
   }
 
   toggleShowAllHours() {

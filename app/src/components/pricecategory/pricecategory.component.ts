@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, SimpleChanges } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'price-category',
@@ -8,12 +9,20 @@ export class PriceCategoryComponent implements OnInit {
 
   @Input() rating: number;
   @Input() showText: boolean = true;
-  @Input() noRatingsText = 'no ratings yet';
+  @Input() noRatingsText;
 
   roundedRating: number;
   colors: Array<string>;
 
+  constructor(private translate: TranslateService){
+
+  }
+
   ngOnInit(): void {
+
+      if(!this.noRatingsText){
+          this.translate.get('RATINGS.NORATINGSYET').subscribe(text => this.noRatingsText = text);
+      }
 
     this.colors = [];
 
@@ -34,6 +43,10 @@ export class PriceCategoryComponent implements OnInit {
     for (let i = this.colors.length; i < 5; i++) {
       this.colors.push('grey');
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+      this.ngOnInit();
   }
 
 }

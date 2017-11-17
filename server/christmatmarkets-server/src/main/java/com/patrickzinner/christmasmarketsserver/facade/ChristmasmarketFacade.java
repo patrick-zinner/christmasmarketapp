@@ -81,10 +81,9 @@ public class ChristmasmarketFacade {
 		Christmasmarket market = this.christmasmarketService.findChristmasMarket(marketId);
 		MarketRating rating = this.christmasmarketService.findRating(userId, market);
 		
-		SingleRatingDto result = null;
+		SingleRatingDto result = new SingleRatingDto();
 		
 		if(rating != null) {
-			result = new SingleRatingDto();
 			result.setRating(rating.getNormalRating());
 			result.setRatingPrice(rating.getPriceRating());
 		}
@@ -95,7 +94,7 @@ public class ChristmasmarketFacade {
 	private ExtraordinaryOpeningHoursDto mapEntityToDto(ExtraordinaryOpeningHours entity) {
 		ExtraordinaryOpeningHoursDto result = new ExtraordinaryOpeningHoursDto();
 
-		result.setDate(result.getDate());
+		result.setDate(entity.getDate());
 		result.setEnd(entity.getEnd());
 		result.setStart(entity.getStart());
 		result.setOpen(entity.getOpen());
@@ -106,7 +105,7 @@ public class ChristmasmarketFacade {
 	private NormalOpeningHoursDto mapEntityToDto(NormalOpeningHours entity) {
 		NormalOpeningHoursDto result = new NormalOpeningHoursDto();
 
-		result.setDayOfWeek(entity.getDayOfWeek());
+		result.setDayOfWeek(entity.getDayOfWeek()-1);
 		result.setEnd(entity.getEnd());
 		result.setStart(entity.getStart());
 		result.setOpen(entity.getOpen());

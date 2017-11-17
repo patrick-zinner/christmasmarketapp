@@ -3,7 +3,7 @@ import {LatLng} from '../../model/latlng';
 import {ChristmasMarketService} from '../../services/christmasmarketservice';
 import {OnInit} from '@angular/core';
 import {Component} from '@angular/core';
-import {NavController, App} from 'ionic-angular';
+import {NavController, App, ModalController} from 'ionic-angular';
 import {Geolocation} from '@ionic-native/geolocation';
 import { OpeninghoursService } from "../../services/openinghoursservice";
 import { MarketDetailPage } from "../marketdetail/marketdetail";
@@ -27,15 +27,14 @@ export class ListPage implements OnInit {
     public navCtrl: NavController,
     private openinghoursService: OpeninghoursService,
     private geolocation: Geolocation,
-    private app: App
+    private app: App,
+    public modalCtrl: ModalController
   ) {
 
   }
 
   public onClickMarket(market) {
-
     this.app.getRootNav().push(MarketDetailPage, { data: market });
-    //this.navCtrl.push(MarketDetailPage, {data: market});
   }
 
   initCache() {
@@ -46,12 +45,11 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
-
-
     this.christmasmarketService.getData.subscribe(markets => {
       this.markets = markets;
       this.allMarkets = markets;
       this.initCache();
+      this.onSearchChange();
     });
     this.christmasmarketService.getMarkets();
 
@@ -69,7 +67,6 @@ export class ListPage implements OnInit {
   }
 
   onSearchChange() {
-    console.log(this.searchText);
     if (this.searchText != null && this.searchText.length > 0) {
       this.markets = this.allMarkets.filter(market => {
         return market.name.toLowerCase().indexOf(this.searchText.toLowerCase()) >= 0;

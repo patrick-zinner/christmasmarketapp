@@ -1,0 +1,56 @@
+{
+  "MAP": "Karte",
+  "LIST": "Liste",
+  "CLOSED": "Geschlossen",
+  "DAYS": {
+    "TODAY": "Heute",
+    "MON": "Mo",
+    "TUE": "Di",
+    "WED": "Mi",
+    "THU": "Do",
+    "FRI": "Fr",
+    "SAT": "Sa",
+    "SUN": "So"
+  },
+  "DETAILPAGE": {
+      "BUTTONRATE": "Markt bewerten",
+      "BUTTONNAVIGATE": "Navigation starten"
+  },
+  "RATINGS":{
+      "NORATINGSYET": "noch nicht bewertet"
+  },
+
+  "RATINGDIALOG": {
+      "TITLE": "Markt bewerten",
+      "HEADERMARKET": "Markt bewerten",
+      "HEADERPRICE": "Marktpreise bewerten",
+      "SAVE": "Speichern",
+      "CANCEL": "Abbrechen"
+  },
+
+  "RATINGTEXTS": {
+      "VALUE1": "sehr schlecht",
+      "VALUE2": "nicht gut",
+      "VALUE3": "okay",
+      "VALUE4": "gut",
+      "VALUE5": "super"
+  },
+
+  "RATINGPRICETEXTS": {
+      "VALUE1": "günstig",
+      "VALUE2": "eher günstig",
+      "VALUE3": "normale Preise",
+      "VALUE4": "eher teuer",
+      "VALUE5": "teuer"
+  },
+
+  "OPENINGHOURS": {
+      "NOTYETSTARTED": "Markt wird am {{value}} starten.",
+      "ALREADYCLOSEDYEAR": "Markt ist heuer bereits geschlossen",
+      "OPENFROMTO": "Markt von {{start}} bis {{end}} geöffnet.",
+      "WILLOPENAT": "Markt wird um {{start}} öffnen.",
+      "CLOSEDFORTODAY": "Markt hat heute bereits geschlossen.",
+      "CLOSEDTODAY": "Heute geschlossen."
+  }
+
+}

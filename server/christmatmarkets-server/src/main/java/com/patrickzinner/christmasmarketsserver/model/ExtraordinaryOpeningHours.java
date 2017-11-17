@@ -18,14 +18,23 @@ import javax.persistence.TemporalType;
 public class ExtraordinaryOpeningHours extends AbstractOpeningHours {
 
 	private static final long serialVersionUID = 1L;
-	
-	@JoinColumn(name="MARKET_ID")
-	@ManyToOne(fetch=FetchType.LAZY)
+
+	@JoinColumn(name = "MARKET_ID")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Christmasmarket market;
 
 	@Column
 	@Temporal(TemporalType.DATE)
 	private Date date;
+
+	public ExtraordinaryOpeningHours() {
+
+	}
+
+	public ExtraordinaryOpeningHours(Boolean open, Integer start, Integer end,  Date date) {
+		super(open, start, end);
+		this.date = date;
+	}
 
 	public void setDate(Date date) {
 		this.date = date;
@@ -34,15 +43,15 @@ public class ExtraordinaryOpeningHours extends AbstractOpeningHours {
 	public Date getDate() {
 		return date;
 	}
-	
+
 	public void setMarket(Christmasmarket market) {
 		this.market = market;
 	}
-	
+
 	public Christmasmarket getMarket() {
 		return market;
 	}
-	
+
 	@PrePersist
 	@PreUpdate
 	public void onCreateOrUpdate() {

@@ -3,12 +3,14 @@
 import { Pipe, PipeTransform } from "@angular/core";
 import { Christmasmarket } from "../model/christmasmarket";
 import { MinutePipe } from "./minutes.pipe";
+import { TranslateService } from "@ngx-translate/core";
 
 @Pipe({ name: 'openinghours' })
 export class OpeningHoursPipe implements PipeTransform {
 
   constructor(
-    private minutePipe: MinutePipe
+    private minutePipe: MinutePipe,
+    private translate: TranslateService
   ) {
 
   }
@@ -18,7 +20,7 @@ export class OpeningHoursPipe implements PipeTransform {
     if (openingHours.open) {
       return this.minutePipe.transform(openingHours.start) + ' - ' + this.minutePipe.transform(openingHours.end);
     } else {
-      return 'Closed';
+      return this.translate.instant('CLOSED');
     }
   }
 }

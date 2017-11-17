@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -19,6 +20,22 @@ import javax.persistence.TemporalType;
 public class Christmasmarket extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
+
+	public Christmasmarket() {
+
+	}
+
+	public Christmasmarket(String name, Date start, Date end, String postalCode, String city, String address,
+			LatLng position) {
+		super();
+		this.name = name;
+		this.start = start;
+		this.end = end;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.address = address;
+		this.position = position;
+	}
 
 	@Column
 	private String name;
@@ -46,10 +63,10 @@ public class Christmasmarket extends AbstractEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastUpdate;
 
-	@OneToMany(mappedBy = "market")
+	@OneToMany(mappedBy = "market", cascade=CascadeType.ALL)
 	private List<NormalOpeningHours> openingHours = new ArrayList<>();
 
-	@OneToMany(mappedBy = "market")
+	@OneToMany(mappedBy = "market", cascade=CascadeType.ALL)
 	private List<ExtraordinaryOpeningHours> extraordinaryOpeningHours = new ArrayList<>();
 
 	@OneToMany(mappedBy = "market")
@@ -138,15 +155,25 @@ public class Christmasmarket extends AbstractEntity {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
+
 	public Date getLastUpdate() {
 		return lastUpdate;
 	}
-	
+
 	@PrePersist
 	@PreUpdate
 	public void onCreateOrUpdate() {
 		this.lastUpdate = new Date();
+	}
+	
+	public void addNormalOpeningHours(NormalOpeningHours hours) {
+		this.openingHours.add(hours);
+		hours.setMarket(this);
+	}
+	
+	public void addExtraordinaryOpeninghours(ExtraordinaryOpeningHours hours) {
+		this.extraordinaryOpeningHours.add(hours);
+		hours.setMarket(this);
 	}
 
 }

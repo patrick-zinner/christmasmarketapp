@@ -30,6 +30,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from "@ionic/storage/es2015";
 import { UserService } from "../services/user.service";
 import { MarketSortPipe } from "../pipes/market-sort";
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { createTranslateLoader } from "../utils/createTranslateLoader";
+import { HttpClient } from "@angular/common/http";
+import { Globalization } from '@ionic-native/globalization';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,16 @@ import { MarketSortPipe } from "../pipes/market-sort";
     BrowserModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+        tabsHideOnSubPages:true
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -79,6 +92,7 @@ import { MarketSortPipe } from "../pipes/market-sort";
     GoogleMaps,
     LaunchNavigator,
     UserService,
+    Globalization,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
 
 

@@ -17,12 +17,21 @@ public class NormalOpeningHours extends AbstractOpeningHours {
 
 	private static final long serialVersionUID = 1L;
 
-	@JoinColumn(name="MARKET_ID")
-	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "MARKET_ID")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Christmasmarket market;
 
 	@Column
 	private Integer dayOfWeek;
+
+	public NormalOpeningHours() {
+
+	}
+
+	public NormalOpeningHours(Boolean open, Integer start, Integer end, Integer dayOfWeek) {
+		super(open, start, end);
+		this.dayOfWeek = dayOfWeek;
+	}
 
 	public void setDayOfWeek(Integer dayOfWeek) {
 		this.dayOfWeek = dayOfWeek;
@@ -39,7 +48,7 @@ public class NormalOpeningHours extends AbstractOpeningHours {
 	public Christmasmarket getMarket() {
 		return market;
 	}
-	
+
 	@PrePersist
 	@PreUpdate
 	public void onCreateOrUpdate() {

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, SimpleChanges } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'ratings',
@@ -9,11 +10,19 @@ export class RatingsComponent implements OnInit {
   @Input() rating: number;
   @Input() numberOfRatings: number;
   @Input() showText: boolean = true;
-  @Input() noRatingsText = 'no ratings yet';
+  @Input() noRatingsText: string;// = 'no ratings yet';
 
   stars: Array<string>;
 
+  constructor(private translate: TranslateService) {
+
+  }
+
   ngOnInit(): void {
+    if (!this.noRatingsText) {
+      this.translate.get('RATINGS.NORATINGSYET').subscribe(text => this.noRatingsText = text);
+    }
+
     this.stars = [];
 
     let fullStars = Math.floor(this.rating);
@@ -31,10 +40,11 @@ export class RatingsComponent implements OnInit {
       this.stars.push('star-outline');
     }
 
-
-
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+      this.ngOnInit();
+  }
 
 
 }

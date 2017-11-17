@@ -54,6 +54,7 @@ public class ChristmasmarketService {
 			newRating.setPriceRating(ratingPrice);
 			newRating.setMarket(market);
 			newRating.setUserId(userId);
+			market.getRatings().add(newRating);
 			return this.marketRatingRepo.save(newRating);
 		}
 	}

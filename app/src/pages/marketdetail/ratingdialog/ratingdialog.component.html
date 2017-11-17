@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Rate the market</ion-title>
+    <ion-title>{{'RATINGDIALOG.TITLE' | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="dismiss()">
       <ion-icon name="close"></ion-icon>
@@ -10,22 +10,21 @@
 </ion-header>
 <ion-content padding>
   <form #form="ngForm">
-    <b>Rate the market</b><br>
+    <b>{{'RATINGDIALOG.HEADERMARKET' | translate}}</b><br>
     <rating-input [(rating)]="rating" [texts]="ratingTexts" name="rating"></rating-input>
-    <b>Rate the market's price</b><br>
+    <b>{{'RATINGDIALOG.HEADERPRICE' | translate}}</b><br>
     <rating-input [(rating)]="ratingPrice" symbol="logo-euro" [texts]="ratingPriceTexts"></rating-input>
-
   </form>
 </ion-content>
 <ion-footer>
   <ion-row>
     <ion-col>
       <button [disabled]="rating == 0 || ratingPrice == 0" ion-button full color="secondary" (click)="saveRating()">
-        Save
+        {{'RATINGDIALOG.SAVE' | translate}}
     </button>
     </ion-col>
     <ion-col>
-      <button ion-button full color="secondary" (click)="dismiss()">Cancel
+      <button ion-button full color="secondary" (click)="dismiss()">{{'RATINGDIALOG.CANCEL' | translate}}
       </button>
     </ion-col>
   </ion-row>

@@ -4,6 +4,6 @@
 <p *ngIf="texts">
     {{texts[rating-1]}}
 </p>
-<p *ngIf="rating == 0">
+<p *ngIf="!rating || rating == 0">
     -
 </p>
