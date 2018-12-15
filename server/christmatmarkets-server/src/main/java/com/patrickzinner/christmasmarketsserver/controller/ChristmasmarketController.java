@@ -45,12 +45,6 @@ public class ChristmasmarketController {
 		result.setResults(markets);
 		return result;
 	}
-	
-	
-	@RequestMapping(value="/gemma", method = RequestMethod.GET)
-	public void alles() {
-		this.test.create();
-	}
 
 	@ResponseBody
 	@RequestMapping(value = "/{lastupdate}", method = RequestMethod.GET)
