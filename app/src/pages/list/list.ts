@@ -7,6 +7,7 @@ import {NavController, App, ModalController} from 'ionic-angular';
 import {Geolocation} from '@ionic-native/geolocation';
 import { OpeninghoursService } from "../../services/openinghoursservice";
 import { MarketDetailPage } from "../marketdetail/marketdetail";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'list',
@@ -21,6 +22,7 @@ export class ListPage implements OnInit {
   openingHours: { [id: number]: boolean; } = {};
   subscription: any;
   searchText: string;
+  date: Date = new Date();
 
   constructor(
     private christmasmarketService: ChristmasMarketService,
@@ -38,7 +40,9 @@ export class ListPage implements OnInit {
   }
 
   initCache() {
-    for (let market of this.markets) {
+    this.openingHours = {};
+
+    for (let market of this.allMarkets) {
       let serviceResult = this.openinghoursService.isOpenAt(market, new Date());
       this.openingHours[market.id] = serviceResult;
     }
@@ -54,6 +58,11 @@ export class ListPage implements OnInit {
     this.christmasmarketService.getMarkets();
 
     this.initGeoLocation();
+    setInterval(() => {
+        this.initCache();
+        this.date = new Date();
+    }, 1000*60);
+
   }
 
   private initGeoLocation() {

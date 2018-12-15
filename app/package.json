@@ -23,7 +23,6 @@
         "@angular/platform-browser": "4.3.0",
         "@angular/platform-browser-dynamic": "4.3.0",
         "@ionic-native/core": "^3.12.1",
-        "@ionic-native/facebook": "^4.3.2",
         "@ionic-native/geolocation": "^4.2.1",
         "@ionic-native/globalization": "^4.4.0",
         "@ionic-native/google-maps": "^4.4.0",
@@ -39,7 +38,6 @@
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-dialogs": "^1.3.3",
-        "cordova-plugin-facebook4": "^1.9.1",
         "cordova-plugin-geolocation": "^2.4.3",
         "cordova-plugin-globalization": "^1.0.7",
         "cordova-plugin-googlemaps": "^2.0.11",
@@ -88,10 +86,6 @@
                 "API_KEY_FOR_ANDROID": "AIzaSyBuwQKRrlDhChC93vMXbkWp-u_DguClPo4"
             },
             "uk.co.workingedge.phonegap.plugin.launchnavigator": {},
-            "cordova-plugin-facebook4": {
-                "APP_ID": "1453326181446734",
-                "APP_NAME": "ChristmasmarketsApp"
-            },
             "cordova-sqlite-storage": {},
             "cordova-plugin-globalization": {}
         },

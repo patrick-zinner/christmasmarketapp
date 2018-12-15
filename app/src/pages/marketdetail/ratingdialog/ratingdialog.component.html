@@ -19,7 +19,7 @@
 <ion-footer>
   <ion-row>
     <ion-col>
-      <button [disabled]="rating == 0 || ratingPrice == 0" ion-button full color="secondary" (click)="saveRating()">
+      <button [disabled]="!rating || !ratingPrice || rating == 0 || ratingPrice == 0" ion-button full color="secondary" (click)="saveRating()">
         {{'RATINGDIALOG.SAVE' | translate}}
     </button>
     </ion-col>

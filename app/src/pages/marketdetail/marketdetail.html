@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>{{market.name}}</ion-title>
-    
+
   </ion-navbar>
 
 </ion-header>
@@ -19,7 +19,7 @@
         <ion-item>
           <ion-icon [color]="'primary'" name="calendar" item-start></ion-icon>
           <p>
-            {{market.start | date:'shortDate'}} - {{market.end | date:'shortDate'}}
+            {{market.start | localizedDate:'shortDate'}} - {{market.end | localizedDate:'shortDate'}}
           </p>
         </ion-item>
         <ion-item (click)="toggleShowAllHours()">
@@ -64,7 +64,7 @@
                 <ion-col col-8>{{market | openinghours:0}}</ion-col>
               </ion-row>
               <ion-row *ngFor="let extraordinaryOpeningHour of market.extraordinaryOpeningHours">
-                <ion-col col-4>{{extraordinaryOpeningHour.date | date:'shortDate'}}:</ion-col>
+                <ion-col col-4>{{extraordinaryOpeningHour.date | localizedDate:'shortDate'}}:</ion-col>
                 <ion-col col-8>
                   <ng-container *ngIf="extraordinaryOpeningHour.open">
                     {{extraordinaryOpeningHour.start | minutes}} - {{extraordinaryOpeningHour.end | minutes}}

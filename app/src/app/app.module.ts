@@ -34,6 +34,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { createTranslateLoader } from "../utils/createTranslateLoader";
 import { HttpClient } from "@angular/common/http";
 import { Globalization } from '@ionic-native/globalization';
+import { LocalizedDatePipe } from "../pipes/localized-date.pipe";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { Globalization } from '@ionic-native/globalization';
     OpeningHoursPipe,
     PriceCategoryComponent,
     RatingDialogComponent,
-    RatingInputComponent
+    RatingInputComponent,
+    LocalizedDatePipe
   ],
   imports: [
     BrowserModule,
@@ -93,6 +95,7 @@ import { Globalization } from '@ionic-native/globalization';
     LaunchNavigator,
     UserService,
     Globalization,
+    LocalizedDatePipe,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
 
 

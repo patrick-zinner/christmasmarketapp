@@ -47,10 +47,10 @@ public class ChristmasmarketController {
 	}
 	
 	
-	/*@RequestMapping(value="/gemma", method = RequestMethod.GET)
+	@RequestMapping(value="/gemma", method = RequestMethod.GET)
 	public void alles() {
-		this.test.create2();
-	}*/
+		this.test.create();
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/{lastupdate}", method = RequestMethod.GET)

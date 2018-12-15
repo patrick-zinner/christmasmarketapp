@@ -1,13 +1,13 @@
 
 
-import { DatePipe } from "@angular/common";
 import { PipeTransform, Pipe } from "@angular/core";
+import { LocalizedDatePipe } from "./localized-date.pipe";
 
 @Pipe({ name: 'minutes' })
 export class MinutePipe implements PipeTransform {
 
   constructor(
-    private datepipe: DatePipe) {
+    private datepipe: LocalizedDatePipe) {
 
   }
 

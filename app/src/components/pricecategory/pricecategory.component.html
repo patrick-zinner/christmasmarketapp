@@ -3,19 +3,19 @@
 <ng-container *ngIf="showText" [ngSwitch]="roundedRating">
     -
     <ng-container *ngSwitchCase="1">
-        Cheap
+        {{'RATINGPRICETEXTS.VALUE1'|translate}}
     </ng-container>
     <ng-container *ngSwitchCase="2">
-        Rather cheap
+        {{'RATINGPRICETEXTS.VALUE2'|translate}}
     </ng-container>
     <ng-container *ngSwitchCase="3">
-        Average price
+        {{'RATINGPRICETEXTS.VALUE3'|translate}}
     </ng-container>
     <ng-container *ngSwitchCase="4">
-        Rather expensive
+        {{'RATINGPRICETEXTS.VALUE4'|translate}}
     </ng-container>
     <ng-container *ngSwitchCase="5">
-        Expensive
+        {{'RATINGPRICETEXTS.VALUE5'|translate}}
     </ng-container>
 </ng-container>
 </span>

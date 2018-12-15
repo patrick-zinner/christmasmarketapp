@@ -27,8 +27,8 @@ export class ChristmasMarketService {
 
 
 
-  apiUrl: string = 'http://127.0.0.1:8080/christmasmarkets/christmasmarkets'
-
+  apiUrl: string = 'http://134.255.219.6:8080/christmasmarkets/christmasmarkets';
+  //apiUrl: string = 'http://192.168.0.20:8080/christmasmarkets';
 
   getMarkets() {
 
@@ -68,8 +68,8 @@ export class ChristmasMarketService {
     return body;
   }
 
-  loadMarket(marketId: number) : Promise<Christmasmarket> {
-      return this.storage.get('markets').then(markets => markets.filter(m => m.id == marketId)[0]);
+  loadMarket(marketId: number): Promise<Christmasmarket> {
+    return this.storage.get('markets').then(markets => markets.filter(m => m.id == marketId)[0]);
   }
 
   findRatingOfMarket(marketId: number): Promise<SingleRating> {
@@ -78,30 +78,30 @@ export class ChristmasMarketService {
     });
   }
 
-  rateMarket(marketId: number, rating: number, ratingPrice: number) : Promise<Christmasmarket> {
-      return this.userService.getAndCreateUser().then(user => {
+  rateMarket(marketId: number, rating: number, ratingPrice: number): Promise<Christmasmarket> {
+    return this.userService.getAndCreateUser().then(user => {
       let requestObj = {
         marketId: marketId,
         userId: user.uniqueId,
         rating: rating,
         ratingPrice: ratingPrice
-    };
+      };
 
-     let observable = this.http.post<Christmasmarket>(this.apiUrl + '/rate', requestObj).map((market:Christmasmarket) => {
-          this.loadMarketsFromStorage().then(allMarkets => {
-              for(let i = 0; i < allMarkets.length; i++){
-                  if(allMarkets[i].id == market.id){
-                      this.remapDates(market);
-                      allMarkets[i] = market;
-                      break;
-                  }
-              }
-              this.storage.set('markets', allMarkets);
-              this.getDataObserver.next(allMarkets);
-              return market;
-          });
-          this.remapDates(market);
+      let observable = this.http.post<Christmasmarket>(this.apiUrl + '/rate', requestObj).map((market: Christmasmarket) => {
+        this.loadMarketsFromStorage().then(allMarkets => {
+          for (let i = 0; i < allMarkets.length; i++) {
+            if (allMarkets[i].id == market.id) {
+              this.remapDates(market);
+              allMarkets[i] = market;
+              break;
+            }
+          }
+          this.storage.set('markets', allMarkets);
+          this.getDataObserver.next(allMarkets);
           return market;
+        });
+        this.remapDates(market);
+        return market;
       });
       return observable.toPromise();
     });

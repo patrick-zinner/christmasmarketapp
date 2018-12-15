@@ -12,7 +12,7 @@
 			<ion-label>
 
 				<h2>{{market.name}}</h2>
-				<p class="item-text-wrap">{{market | openingstate}}</p>
+				<p class="item-text-wrap">{{market | openingstate:date}}</p>
 				<ratings [rating]="market.rating" [noRatingsText]="'n/a'" [showText]="false" [numberOfRatings]="market.numberOfRatings"></ratings>
 				-
 				<price-category [rating]="market.ratingPrice" [noRatingsText]="'n/a'" [showText]="false"></price-category>

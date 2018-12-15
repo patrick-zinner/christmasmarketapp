@@ -15,15 +15,6 @@ export class RatingInputComponent{
 
   possibleRatings: Array<number> = [1, 2, 3, 4, 5];
 
-  constructor(){
-      this.possibleRatings =  [1, 2, 3, 4, 5];
-
-  }
-
-  ngOnInit(){
-
-  }
-
   onClickRating(rating: number) {
     this.rating = rating;
     this.ratingChange.emit(this.rating);

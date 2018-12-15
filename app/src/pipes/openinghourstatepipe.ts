@@ -3,28 +3,34 @@
 import { OpeninghoursService } from "../services/openinghoursservice";
 import { Christmasmarket } from "../model/christmasmarket";
 import { Pipe, PipeTransform } from "@angular/core";
-import { DatePipe } from "@angular/common";
 import { MinutePipe } from "./minutes.pipe";
 import { TranslateService } from "@ngx-translate/core";
+import { LocalizedDatePipe } from "./localized-date.pipe";
 
 @Pipe({ name: 'openingstate' })
 export class OpeningHourStatePipe implements PipeTransform {
 
   constructor(
     private openinghoursService: OpeninghoursService,
-    private datepipe: DatePipe,
     private minutePipe: MinutePipe,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private localizedDate: LocalizedDatePipe) {
 
   }
 
-  transform(market: Christmasmarket): string {
-    let now = (new Date()).getTime();
+  transform(market: Christmasmarket, date?: Date): string {
+    let now = null;
+    if (date) {
+      now = date;
+    } else {
+      now = (new Date()).getTime();
+    }
+
     let nowDate = new Date();
     if (market) {
 
       if (market.start.getTime() > now) {
-        let param = this.datepipe.transform(market.start, 'shortDate');
+        let param = this.localizedDate.transform(market.start, 'shortDate');
         return this.translate.instant('OPENINGHOURS.NOTYETSTARTED', { 'value': param });
       } else if (market.end.getTime() < now) {
         return this.translate.instant('OPENINGHOURS.ALREADYCLOSEDYEAR');
